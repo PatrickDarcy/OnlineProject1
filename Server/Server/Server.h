@@ -2,6 +2,7 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib,"ws2_32.lib")
 #include <WinSock2.h>
+#include <string>
 #include <iostream>
 
 enum Packet
@@ -14,7 +15,7 @@ enum Packet
 class Server
 {
 public: 
-	Server(int Port, bool BroadcastPublically = false);
+	Server(int Port, bool BroadcastPublically);
 	bool ListenForNewConnection();
 
 private:
@@ -42,4 +43,4 @@ private:
 	SOCKET slisten;//Create socket so listen for new connections
 };
 
-Server* serverPtr;
+static Server* serverPtr;
