@@ -1,0 +1,21 @@
+#pragma once
+enum class PacketType
+{
+	PLAYERSET,
+	STATECHANGE,
+	PLAYERUPDATE,
+	GAMEUPDATE,
+	GAMEEND
+};
+
+enum class GameState
+{
+	SELECT,
+	SELECTBROADCAST,
+	SELECTIP,
+	WAITING,
+	START,
+	GAMEPLAY,
+	GAMEOVER,
+	SERVERCLOSED
+};
