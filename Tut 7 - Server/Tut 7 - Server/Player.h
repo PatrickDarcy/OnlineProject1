@@ -17,8 +17,12 @@ public:
 
 	static float s_radius;
 	static float s_speed;
+	static float s_worldWidth;
+	static float s_worldHeight;
 
 private:
 	sf::CircleShape m_player;
+
+	void checkBoundary();
 };
 

@@ -40,6 +40,9 @@ private:
 	sf::Time m_gameTime;
 	sf::Time m_countDownTime;
 
+	sf::Text m_gameTimeText;
+	sf::Font m_font;
+
 	void listenForConnections();
 	void startServer();
 	void connect();
@@ -50,6 +53,5 @@ private:
 	void updateGameplay(sf::Time t_dt);
 	void updateStart(sf::Time t_dt);
 	void reset();
-
 };
 

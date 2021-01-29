@@ -2,6 +2,8 @@
 
 float Player::s_radius = 20.0f;
 float Player::s_speed = 5.0f;
+float Player::s_worldWidth = 600.0f;
+float Player::s_worldHeight = 600.0f;
 
 Player::Player()
 {
@@ -61,4 +63,32 @@ sf::Vector2f Player::getPosition()
 void Player::updatePos(sf::Vector2f t_velocity)
 {
 	m_player.setPosition(m_player.getPosition() + t_velocity);
+	checkBoundary();
+}
+
+void Player::checkBoundary()
+{
+	sf::Vector2f m_position = m_player.getPosition();
+
+	if (m_position.x + s_radius < 0)
+	{
+		m_position.x = s_worldWidth + s_radius;
+	}
+
+	else if (m_position.x - s_radius > s_worldWidth)
+	{
+		m_position.x = 0 - s_radius;
+	}
+
+	if (m_position.y + s_radius < 0)
+	{
+		m_position.y = s_worldWidth + s_radius;
+	}
+
+	else if (m_position.y - s_radius > s_worldWidth)
+	{
+		m_position.y = 0 - s_radius;
+	}
+
+	m_player.setPosition(m_position);
 }

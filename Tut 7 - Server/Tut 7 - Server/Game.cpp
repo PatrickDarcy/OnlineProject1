@@ -15,6 +15,12 @@ Game::Game() :
 
 	m_ipInput = "127.0.0.1";
 
+	m_font.loadFromFile("fonts/LTInternet-Regular/tff");
+
+	m_gameTimeText.setFont(m_font);
+	m_gameTimeText.setCharacterSize(40);
+	m_gameTimeText.setPosition(300, 300);
+
 	reset();
 }
 
@@ -62,6 +68,26 @@ void Game::setStartData(StartData t_data)
 void Game::setEndData(EndData t_data)
 {
 	changeState(GameState::GAMEOVER);
+
+	std::stringstream timeStream;
+
+	timeStream << std::fixed << std::setprecision(2) << t_data.m_timeLasted.asSeconds();
+
+	std::string timeString = timeStream.str();
+
+	if (t_data.m_playerIndex == m_playerIndex)
+	{
+		m_gameTimeText.setString(" lasted " + timeString + "s");
+	}
+	else if (t_data.m_targetIndex == m_playerIndex)
+	{
+		m_gameTimeText.setString("You Lasted " + timeString + "s");
+	}
+	else
+	{
+		m_gameTimeText.setString(" lasted " + timeString + "s");
+	}
+
 }
 
 void Game::changeState(GameState t_changeState)
@@ -176,6 +202,11 @@ void Game::render()
 	m_players[1].render(m_window);
 	m_players[2].render(m_window);
 	m_window.display();
+
+	if (m_state == GameState::GAMEOVER)
+	{
+		m_window.draw(m_gameTimeText);
+	}
 }
 
 void Game::updateGameplay(sf::Time t_dt)
